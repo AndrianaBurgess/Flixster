@@ -1,6 +1,7 @@
 package com.example.aburgess11.flixster;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +14,8 @@ import com.bumptech.glide.Glide;
 import com.example.aburgess11.flixster.models.Config;
 import com.example.aburgess11.flixster.models.Movie;
 
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
@@ -24,7 +27,6 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
 
     //List of movies
-
     ArrayList<Movie> movies;
     //config needed for image urls
     Config config;
@@ -47,7 +49,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
         //get context and create from inflater
         context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        // ceate the view using the item_movie layout
+        // create the view using the item_movie layout
         View movieView = inflater.inflate(R.layout.item_movie, parent , false);
         //return a new view holder
 
@@ -98,7 +100,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
 
     // create the view holder as static inner class
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         //tracl view objects
 
@@ -114,6 +116,19 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
             ivBackdropImage = (ImageView) itemView.findViewById(R.id.ivBackdropImage);
             tvOverview = (TextView) itemView.findViewById(R.id.tvOverview);
             tvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            int position = getAdapterPosition();
+
+            if (position != RecyclerView.NO_POSITION){
+                Movie movie = movies.get(position);
+                Intent intent = new Intent(context, MovieDetailsActivity.class);
+                intent.putExtra(Movie.class.getSimpleName(), Parcels.wrap(movie));
+                context.startActivity(intent);
+            }
         }
     }
 }
