@@ -24,6 +24,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
         android:layout_toRightOf="@+id/ivPosterImage"
+        android:fontFamily="monospace"
         android:text="Movie Title"
         android:textAppearance="@android:style/TextAppearance.Large"
         android:textColor="@color/colorAccent" />
