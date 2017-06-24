@@ -79,7 +79,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
             //load the backdrop image
             imageUrl = config.getImageUrl(config.getBackdropSize(), movie.getBackdropPath());
         }
-
+        movie.setBackdropPath(config.getImageUrl(config.getBackdropSize(), movie.getBackdropPath()));
         // get the correct placeholder and imageview dor the currenr orientation
         int placeHolderId = isPortrait ? R.drawable.flicks_movie_placeholder : R.drawable.flicks_backdrop_placeholder;
         ImageView imageView = isPortrait ? holder.ivPosterImage : holder.ivBackdropImage;
